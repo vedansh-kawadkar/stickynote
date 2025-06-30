@@ -3,16 +3,23 @@
     -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
 }
 
+
+.stackpane-container {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 12, 0.2, 0, 4);
+}
 /* Entire Note Container - Dark background */
-/* .note-container {
-    -fx-background-color: #c36f6f; 
+.note-container {
+    -fx-background-color: transparent; 
     -fx-border-width: 0;
     -fx-padding: 0;
-} */
+    /* -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 12, 0.2, 0, 4); */
+}
 
 /* Top Bar (title area) - Darker toolbar */
 .top-bar {
     -fx-background-color: #3c3c3c; /* slightly lighter than base */
+    /* -fx-background-image: url('/textures/texture3.jpg'); */
+    -fx-background-size: cover;
     -fx-padding: 6 10 6 10;
     -fx-spacing: 5;
     -fx-border-width: 0;
@@ -49,4 +56,64 @@
     -fx-font-size: 14px;
     -fx-font-family: "Segoe UI", "SansSerif";
     -fx-border-width: 0;
+    /* -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 12, 0.2, 0, 4); */
+}
+
+/* .menu-dropdown-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+} */
+.menu-button > .arrow-button {
+    -fx-padding: 0;
+    -fx-shape: none;
+}
+
+/* Hide the little arrow in MenuButton or SplitMenuButton */
+.flat-menu-button > .arrow-button,
+.flat-menu-button > .arrow-button > .arrow {
+    -fx-padding: 0;
+    -fx-shape: ""; /* removes the arrow shape */
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+.menu-button > .arrow-button {
+    -fx-padding: 0;
+    -fx-shape: none;
+}
+.flat-menu-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.flat-menu-button:hover {
+    -fx-background-color: #4a4a4a;
+}
+
+/* Accent Grid (GridPane inside CustomMenuItem) */
+.accent-grid {
+    -fx-padding: 10;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+}
+
+/* Accent Color Button Tiles */
+.accent-tile {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: transparent;
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 4, 0, 1, 1);
+    -fx-padding: 0;
+}
+
+/* Hover effect for tiles */
+.accent-tile:hover {
+    -fx-border-color: #ffffff66;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.4), 6, 0, 1, 1);
 }

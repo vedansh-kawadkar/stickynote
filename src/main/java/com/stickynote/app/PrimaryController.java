@@ -6,12 +6,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -41,6 +41,8 @@ public class PrimaryController {
     private Stage stage;
     private double xOffset = 0;
     private double yOffset = 0;
+
+    private String currentAccent = "blue";
 
     @FXML
     private TextArea noteArea;
@@ -93,6 +95,7 @@ public class PrimaryController {
         });
     }
 
+    //Set name of the note in the title bar
     public void setFileName(String inputNameOrPath) {
         File dir = new File(NOTE_DIR);
         if (!dir.exists()) {
@@ -121,15 +124,6 @@ public class PrimaryController {
 
         noteArea.setText(loadNotes());
         noteArea.textProperty().addListener((obs, oldText, newText) -> saveNotes(newText));
-    }
-
-    private String ensureUniqueTitle(String baseTitle) {
-        int i = 1;
-        String candidate = baseTitle;
-        while (new File(NOTE_DIR, candidate.replaceAll("\\s+", "_") + ".txt").exists()) {
-            candidate = baseTitle + " (" + i++ + ")";
-        }
-        return candidate;
     }
 
     public void setStage(Stage stage) {
@@ -177,8 +171,27 @@ public class PrimaryController {
         if (!file.exists()) {
             return "";
         }
+
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            return reader.lines().collect(Collectors.joining("\n"));
+            String firstLine = reader.readLine();
+            StringBuilder content = new StringBuilder();
+
+            if (firstLine != null && firstLine.startsWith("#color=")) {
+                currentAccent = firstLine.substring(7);
+                applyAccent(currentAccent);
+            } else {
+                // No color metadata found
+                currentAccent = "blue";
+                applyAccent(currentAccent);
+                content.append(firstLine).append("\n");
+            }
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+
+            return content.toString().strip();
         } catch (IOException e) {
             e.printStackTrace();
             return "";
@@ -187,6 +200,7 @@ public class PrimaryController {
 
     private void saveNotes(String content) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write("#color=" + currentAccent + "\n");
             writer.write(content);
         } catch (IOException e) {
             e.printStackTrace();
@@ -196,9 +210,9 @@ public class PrimaryController {
     @FXML
     private void handleNewNote() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/primary.fxml"));
             Scene scene = new Scene(loader.load(), 500, 400);
-            scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
             PrimaryController controller = loader.getController();
             controller.setStage(new Stage());
@@ -346,9 +360,9 @@ public class PrimaryController {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/primary.fxml"));
             Scene scene = new Scene(loader.load(), 500, 400);
-            scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
             PrimaryController controller = loader.getController();
 
@@ -359,7 +373,7 @@ public class PrimaryController {
             newStage.setScene(scene);
 
             controller.setStage(newStage);
-            controller.setFileName(fullPath); // ✅ pass full path here
+            controller.setFileName(fullPath);
 
             newStage.setTitle(file.getName());
             newStage.show();
@@ -397,6 +411,108 @@ public class PrimaryController {
                 Platform.exit();
             }
         }
+    }
+
+    @FXML
+    private void setAccentTeal() {
+        currentAccent = "teal";
+        applyAccent(currentAccent);
+        saveNotes(noteArea.getText());
+    }
+
+    @FXML
+    private void setAccentCoral() {
+        currentAccent = "coral";
+        applyAccent(currentAccent);
+        saveNotes(noteArea.getText());
+    }
+
+    @FXML
+    private void setAccentSlate() {
+        currentAccent = "slate";
+        applyAccent(currentAccent);
+        saveNotes(noteArea.getText());
+    }
+
+    private void applyAccent(String color) {
+        System.out.println(getClass().getResource("/textures/texture1.jpg").toExternalForm());
+
+        String hex = switch (color.toLowerCase()) {
+            case "teal" ->
+                "#008080";
+            case "coral" ->
+                "#e8675b";
+            case "slate" ->
+                "#6A5ACD";
+            default ->
+                "#3c3c3c"; // default blue
+        };
+
+        String style = String.format("-fx-background-color: %s", hex);
+        System.out.println(style);
+        topBar.setStyle(style);
+        // topBar.setStyle("-fx-background-color: {}".format(hex));
+    }
+
+    String currentTexture = "";
+
+    public void applyTexture(String texture) {
+        String path = switch (texture.toLowerCase()) {
+            case "texture1" -> "/textures/texture1.jpg";
+            case "texture2" -> "/textures/texture2.jpg";
+            case "texture3" -> "/textures/texture3.jpg";
+            default -> "";
+        };
+
+        URL textureUrl = getClass().getResource(path);
+
+        if (textureUrl != null) {
+            String style = String.format(
+                    "-fx-background-color: transparent;"
+                    + "-fx-background-image: url('%s');"
+                    + "-fx-background-repeat: no-repeat;"
+                    +"-fx-background-position: center;"
+                    + "-fx-background-size: cover;"
+,
+                    textureUrl.toExternalForm()
+            );
+
+            topBar.setStyle("");  // Reset style
+            topBar.setStyle(style);
+
+        } else {
+            System.err.println("Texture not found.");
+        }
+    }
+
+    public void setTexture1() {
+        currentTexture = "texture1";
+        applyTexture(currentTexture);
+    }
+
+    public void setTexture2() {
+        currentTexture = "texture2";
+        applyTexture(currentTexture);
+    }
+
+    public void setTexture3() {
+        currentTexture = "texture3";
+        applyTexture(currentTexture);
+    }
+
+    @FXML
+    private void toggleTheme() {
+        // boolean isDark = borderPane.getStyleClass().contains("dark-theme");
+
+        // if (isDark) {
+        //     borderPane.getStyleClass().remove("dark-theme");
+        //     borderPane.getScene().getStylesheets().clear();
+        //     borderPane.getScene().getStylesheets().add(getClass().getResource("/styles-light.css").toExternalForm());
+        // } else {
+        //     borderPane.getStyleClass().add("dark-theme");
+        //     borderPane.getScene().getStylesheets().clear();
+        //     borderPane.getScene().getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        // }
     }
 
 }

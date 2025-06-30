@@ -14,9 +14,9 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            URL fxmlLocation = getClass().getResource("/com/stickynote/app/primary.fxml");
+            URL fxmlLocation = getClass().getResource("/primary.fxml");
             if (fxmlLocation == null) {
-                throw new IOException("FXML file not found at /com/stickynote/app/primary.fxml");
+                throw new IOException("FXML file not found at primary.fxml");
             }
 
             FXMLLoader loader = new FXMLLoader(fxmlLocation);
@@ -28,7 +28,7 @@ public class App extends Application {
             }
 
             PrimaryController controller = loader.getController();
-            controller.setFileName(null); // This will create a new untitled note
+            controller.setFileName(null);
             controller.setStage(primaryStage);
 
             primaryStage.initStyle(StageStyle.UNDECORATED);

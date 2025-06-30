@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+   fx:controller="com.stickynote.app.PrimaryController"
+   styleClass="stackpane-container">
+
+   <BorderPane fx:id="borderPane"
+      prefWidth="500" prefHeight="400"
+      styleClass="note-container">
+
+      <top>
+         <HBox fx:id="topBar" spacing="5" alignment="CENTER"
+            styleClass="top-bar">
+
+            <!-- Left: New Note -->
+            <Button onAction="#handleNewNote">
+               <graphic>
+                  <ImageView fitWidth="20" fitHeight="20">
+                     <image>
+                        <Image url="@icons/add_note.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="New note" />
+               </tooltip>
+            </Button>
+
+            <!-- Spacer before center -->
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Center: Editable Title -->
+            <HBox spacing="5" alignment="CENTER">
+               <Label fx:id="noteTitleLabel" text="Untitled" styleClass="title-label" />
+               <TextField fx:id="noteTitleField" promptText="Enter title..."
+                  visible="false" styleClass="title-field" maxWidth="200" />
+            </HBox>
+
+            <!-- Spacer after center -->
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Right: Other Controls -->
+            <HBox spacing="5" alignment="CENTER_RIGHT">
+               <Button fx:id="notesListButton" onAction="#handleNotesList">
+                  <graphic>
+                     <ImageView fitWidth="20" fitHeight="20">
+                        <image>
+                           <Image url="@icons/notes_list.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+                  <tooltip>
+                     <Tooltip text="Open notes list" />
+                  </tooltip>
+               </Button>
+
+               <MenuButton text="" fx:id="optionsMenu" styleClass="flat-menu-button">
+                  <graphic>
+                     <ImageView fitWidth="20" fitHeight="20">
+                        <image>
+                           <Image url="@icons/options.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+
+                  <items>
+                     <MenuItem text="Delete Note" onAction="#handleDeleteNote">
+                        <graphic>
+                           <ImageView fitWidth="16" fitHeight="16">
+                              <image>
+                                 <Image url="@icons/bin.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </MenuItem>
+                     <Menu text="Choose Accent">
+                        <graphic>
+                           <ImageView fitWidth="16" fitHeight="16">
+                              <image>
+                                 <Image url="@icons/color_accent.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                        <items>
+                           <!-- <MenuItem text="Teal" onAction="#setAccentTeal" />
+                           <MenuItem text="Slate Blue" onAction="#setAccentSlate" />
+                           <MenuItem text="Coral" onAction="#setAccentCoral" /> -->
+                           <CustomMenuItem>
+                              <content>
+
+                                 <GridPane styleClass="accent-grid" alignment='CENTER' hgap="10"
+                                    vgap="10">
+                                    <children>
+                                       <Button styleClass="accent-tile" GridPane.rowIndex="0"
+                                          GridPane.columnIndex="0" onAction="#setAccentTeal"
+                                          style="-fx-background-color: #008080;" prefWidth="30"
+                                          prefHeight="30" />
+                                       <Button styleClass="accent-tile" GridPane.rowIndex="0"
+                                          GridPane.columnIndex="1" onAction="#setAccentSlate"
+                                          style="-fx-background-color: #6A5ACD;" prefWidth="30"
+                                          prefHeight="30" />
+                                       <Button styleClass="accent-tile" GridPane.rowIndex="0"
+                                          GridPane.columnIndex="2" onAction="#setAccentCoral"
+                                          style="-fx-background-color: #e8675b;" prefWidth="30"
+                                          prefHeight="30" />
+
+                                       <Button styleClass="accent-tile" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                                          onAction="#setTexture1"
+                                          style="-fx-background-image: url('/textures/texture1.jpg'); -fx-background-size: cover;"
+                                          prefWidth="30" prefHeight="30" />
+                                       <Button styleClass="accent-tile" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                                          onAction="#setTexture2"
+                                          style="-fx-background-image: url('/textures/texture2.jpg'); -fx-background-size: cover;"
+                                          prefWidth="30" prefHeight="30" />
+                                       <Button styleClass="accent-tile" GridPane.rowIndex="1" GridPane.columnIndex="2"
+                                          onAction="#setTexture3"
+                                          style="-fx-background-image: url('/textures/texture3.jpg'); -fx-background-size: cover;"
+                                          prefWidth="30" prefHeight="30" />
+                                    </children>
+                                 </GridPane>
+                              </content>
+
+                           </CustomMenuItem>
+                        </items>
+                     </Menu>
+                     <!-- <MenuItem text="🌙 Toggle Theme" onAction="#toggleTheme" /> -->
+                  </items>
+               </MenuButton>
+
+               <Button onAction="#handleMinimize">
+                  <graphic>
+                     <ImageView fitWidth="20" fitHeight="20">
+                        <image>
+                           <Image url="@icons/mini.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+                  <tooltip>
+                     <Tooltip text="Minimize note" />
+                  </tooltip>
+               </Button>
+
+               <!-- <Button onAction="#handleDeleteNote">
+                  <graphic>
+                     <ImageView fitWidth="20" fitHeight="20">
+                        <image>
+                           <Image url="@icons/bin.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+                  <tooltip>
+                     <Tooltip text="Delete note" />
+                  </tooltip>
+               </Button> -->
+
+               <Button onAction="#handleClose">
+                  <graphic>
+                     <ImageView fitWidth="20" fitHeight="20">
+                        <image>
+                           <Image url="@icons/cross.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+                  <tooltip>
+                     <Tooltip text="Close note" />
+                  </tooltip>
+               </Button>
+
+
+            </HBox>
+
+         </HBox>
+      </top>
+
+      <center>
+         <TextArea fx:id="noteArea" wrapText="true" />
+      </center>
+
+   </BorderPane>
+</StackPane>
