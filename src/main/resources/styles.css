@@ -5,33 +5,38 @@
 
 
 .stackpane-container {
-    /* -fx-padding: 8; */
-    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.4), 6, 0, 1, 1);
+    -fx-effect: dropshadow(gaussian, rgba(29, 29, 29, 0.4), 6, 0, 1, 1);
+    /* -fx-border-color: #3a3a3a;
+    -fx-border-width: 1.5; */
 }
+
 /* Entire Note Container - Dark background */
 .note-container {
-    -fx-background-color: transparent; 
-    -fx-border-width: 0;
-    -fx-padding: 8;
-    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.4), 6, 0, 1, 1);
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(18, 17, 17, 0.4), 6, 0, 1, 1);
+    -fx-border-color: #3a3a3a;
+    -fx-border-width: 1.5;
 }
 
 /* Top Bar (title area) - Darker toolbar */
 .top-bar {
-    -fx-background-color: #3c3c3c; /* slightly lighter than base */
+    -fx-background-color: #3c3c3c;
+    /* slightly lighter than base */
     /* -fx-background-image: url('/textures/texture3.jpg'); */
     -fx-background-size: cover;
     -fx-padding: 6 10 6 10;
     -fx-spacing: 5;
     -fx-border-width: 0;
-    
+
 }
 
 /* Title Label + Input */
-.title-label, .title-field {
-    -fx-font-size: 14px;
+.title-label,
+.title-field {
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-text-fill: #e2dfdf; /* near-white for contrast */
+    -fx-text-fill: #e2dfdf;
+    /* near-white for contrast */
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
@@ -50,40 +55,45 @@
 }
 
 /* TextArea Styling - transparent dark writing area */
-.text-area, .text-area .content {
+.text-area,
+.text-area .content {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
     -fx-padding: 6;
     -fx-text-fill: #3a3a3a;
     -fx-font-size: 15px;
-    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
-    -fx-border-width: 0;
-    /* -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.35), 8, 0.1, 0, 2); */
+    -fx-font-weight: normal;
+    -fx-font-family: "Segoe UI Semibold", "Segoe UI", sans-serif;
+    -fx-background-color: #FAF0E6;
 }
+
 
 /* .menu-dropdown-button {
     -fx-background-color: transparent;
     -fx-padding: 0;
     -fx-cursor: hand;
 } */
-.menu-button > .arrow-button {
+.menu-button>.arrow-button {
     -fx-padding: 0;
     -fx-shape: none;
 }
 
 /* Hide the little arrow in MenuButton or SplitMenuButton */
-.flat-menu-button > .arrow-button,
-.flat-menu-button > .arrow-button > .arrow {
+.flat-menu-button>.arrow-button,
+.flat-menu-button>.arrow-button>.arrow {
     -fx-padding: 0;
-    -fx-shape: ""; /* removes the arrow shape */
+    -fx-shape: "";
+    /* removes the arrow shape */
     -fx-background-color: transparent;
     -fx-background-insets: 0;
     -fx-background-radius: 0;
 }
-.menu-button > .arrow-button {
+
+.menu-button>.arrow-button {
     -fx-padding: 0;
     -fx-shape: none;
 }
+
 .flat-menu-button {
     -fx-background-color: transparent;
     -fx-border-color: transparent;

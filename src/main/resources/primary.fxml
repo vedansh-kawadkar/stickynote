@@ -19,7 +19,7 @@
             <!-- Left: New Note -->
             <Button onAction="#handleNewNote" fx:id="topBarBtn">
                <graphic>
-                  <ImageView fitWidth="20" fitHeight="20">
+                  <ImageView fitWidth="22" fitHeight="22">
                      <image>
                         <Image url="@icons/add_note.png" />
                      </image>
@@ -47,7 +47,7 @@
             <HBox spacing="5" alignment="CENTER_RIGHT">
                <Button fx:id="notesListButton" onAction="#handleNotesList">
                   <graphic>
-                     <ImageView fitWidth="20" fitHeight="20">
+                     <ImageView fitWidth="22" fitHeight="22">
                         <image>
                            <Image url="@icons/notes_list.png" />
                         </image>
@@ -60,7 +60,7 @@
 
                <MenuButton text="" fx:id="optionsMenu" styleClass="flat-menu-button">
                   <graphic>
-                     <ImageView fitWidth="20" fitHeight="20">
+                     <ImageView fitWidth="22" fitHeight="22">
                         <image>
                            <Image url="@icons/options.png" />
                         </image>
@@ -133,7 +133,7 @@
 
                <Button onAction="#handleMinimize" fx:id="topBarBtn">
                   <graphic>
-                     <ImageView fitWidth="20" fitHeight="20">
+                     <ImageView fitWidth="22" fitHeight="22">
                         <image>
                            <Image url="@icons/mini.png" />
                         </image>
@@ -146,7 +146,7 @@
 
                <!-- <Button onAction="#handleDeleteNote">
                   <graphic>
-                     <ImageView fitWidth="20" fitHeight="20">
+                     <ImageView fitWidth="22" fitHeight="22">
                         <image>
                            <Image url="@icons/bin.png" />
                         </image>
@@ -159,7 +159,7 @@
 
                <Button onAction="#handleClose" fx:id="topBarBtn">
                   <graphic>
-                     <ImageView fitWidth="20" fitHeight="20">
+                     <ImageView fitWidth="22" fitHeight="22">
                         <image>
                            <Image url="@icons/cross.png" />
                         </image>

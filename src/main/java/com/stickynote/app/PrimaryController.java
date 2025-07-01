@@ -128,6 +128,7 @@ public class PrimaryController {
         noteArea.textProperty().addListener((obs, oldText, newText) -> saveNotes(newText));
     }
 
+
     public void setStage(Stage stage) {
         this.stage = stage;
         openWindows.add(stage);
@@ -155,6 +156,7 @@ public class PrimaryController {
         }
     }
 
+
     @FXML
     private void handleClose() {
         if (stage != null) {
@@ -168,6 +170,7 @@ public class PrimaryController {
             }
         }
     }
+
 
     private String loadNotes() {
         File file = new File(fileName);
@@ -201,6 +204,7 @@ public class PrimaryController {
         }
     }
 
+
     private void saveNotes(String content) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write("#color=" + currentAccent + "\n");
@@ -209,6 +213,7 @@ public class PrimaryController {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     private void handleNewNote() {
@@ -227,11 +232,13 @@ public class PrimaryController {
             newStage.setTitle("Sticky Note");
             newStage.setAlwaysOnTop(false);
             newStage.setResizable(true);
+            new App().makeResizable(newStage, scene);
             newStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     private void finishEditingTitle() {
         String newTitle = noteTitleField.getText().trim();
@@ -274,6 +281,7 @@ public class PrimaryController {
         noteTitleLabel.setVisible(true);
         noteTitleField.setVisible(false);
     }
+
 
     @FXML
     private void handleNotesList() {
@@ -351,6 +359,7 @@ public class PrimaryController {
         menu.show(notesListButton, Side.BOTTOM, 0, 0);
     }
 
+
     private void openNote(String fileNameWithExtension) {
         File file = new File(NOTE_DIR, fileNameWithExtension);
         String fullPath = file.getAbsolutePath();
@@ -385,6 +394,7 @@ public class PrimaryController {
         }
     }
 
+
     @FXML
     private void handleDeleteNote() {
         if (fileName == null) {
@@ -416,12 +426,14 @@ public class PrimaryController {
         }
     }
 
+
     @FXML
     private void setAccentTeal() {
         currentAccent = "teal";
         applyTheme(currentAccent);
         saveNotes(noteArea.getText());
     }
+
 
     @FXML
     private void setAccentCoral() {
@@ -430,6 +442,7 @@ public class PrimaryController {
         saveNotes(noteArea.getText());
     }
 
+
     @FXML
     private void setAccentSlate() {
         currentAccent = "slate";
@@ -437,17 +450,20 @@ public class PrimaryController {
         saveNotes(noteArea.getText());
     }
 
+
     public void setTexture1() {
         currentAccent = "texture1";
         applyTheme(currentAccent);
         saveNotes(noteArea.getText());
     }
 
+
     public void setTexture2() {
         currentAccent = "texture2";
         applyTheme(currentAccent);
         saveNotes(noteArea.getText());
     }
+
 
     public void setTexture3() {
         currentAccent = "texture3";
