@@ -56,6 +56,8 @@ public class PrimaryController {
     private Button notesListButton;
     @FXML
     private BorderPane borderPane;
+    @FXML
+    private Button topBarBtn;
 
     private static int untitledCount = 1;
     private static int untitledCounter = 1;
@@ -143,6 +145,7 @@ public class PrimaryController {
             }
         });
     }
+    
 
     @FXML
     private void handleMinimize() {
@@ -178,11 +181,11 @@ public class PrimaryController {
 
             if (firstLine != null && firstLine.startsWith("#color=")) {
                 currentAccent = firstLine.substring(7);
-                applyAccent(currentAccent);
+                applyTheme(currentAccent);
             } else {
                 // No color metadata found
                 currentAccent = "blue";
-                applyAccent(currentAccent);
+                applyTheme(currentAccent);
                 content.append(firstLine).append("\n");
             }
 
@@ -416,88 +419,89 @@ public class PrimaryController {
     @FXML
     private void setAccentTeal() {
         currentAccent = "teal";
-        applyAccent(currentAccent);
+        applyTheme(currentAccent);
         saveNotes(noteArea.getText());
     }
 
     @FXML
     private void setAccentCoral() {
         currentAccent = "coral";
-        applyAccent(currentAccent);
+        applyTheme(currentAccent);
         saveNotes(noteArea.getText());
     }
 
     @FXML
     private void setAccentSlate() {
         currentAccent = "slate";
-        applyAccent(currentAccent);
+        applyTheme(currentAccent);
         saveNotes(noteArea.getText());
     }
 
-    private void applyAccent(String color) {
-        System.out.println(getClass().getResource("/textures/texture1.jpg").toExternalForm());
+    public void setTexture1() {
+        currentAccent = "texture1";
+        applyTheme(currentAccent);
+        saveNotes(noteArea.getText());
+    }
 
-        String hex = switch (color.toLowerCase()) {
+    public void setTexture2() {
+        currentAccent = "texture2";
+        applyTheme(currentAccent);
+        saveNotes(noteArea.getText());
+    }
+
+    public void setTexture3() {
+        currentAccent = "texture3";
+        applyTheme(currentAccent);
+        saveNotes(noteArea.getText());
+    }
+
+    private void applyTheme(String theme) {
+        // System.out.println(getClass().getResource("/textures/texture1.jpg").toExternalForm());
+
+        String applicableTheme = switch (theme.toLowerCase()) {
             case "teal" ->
                 "#008080";
             case "coral" ->
                 "#e8675b";
             case "slate" ->
                 "#6A5ACD";
+            case "texture1" ->
+                "/textures/texture1.jpg";
+            case "texture2" ->
+                "/textures/texture2.jpg";
+            case "texture3" ->
+                "/textures/texture3.jpg";
             default ->
-                "#3c3c3c"; // default blue
+                "#3c3c3c"; // default grey
         };
 
-        String style = String.format("-fx-background-color: %s", hex);
-        System.out.println(style);
-        topBar.setStyle(style);
-        // topBar.setStyle("-fx-background-color: {}".format(hex));
-    }
+        System.out.println("Applied Theme: " + applicableTheme);
 
-    String currentTexture = "";
-
-    public void applyTexture(String texture) {
-        String path = switch (texture.toLowerCase()) {
-            case "texture1" -> "/textures/texture1.jpg";
-            case "texture2" -> "/textures/texture2.jpg";
-            case "texture3" -> "/textures/texture3.jpg";
-            default -> "";
-        };
-
-        URL textureUrl = getClass().getResource(path);
-
-        if (textureUrl != null) {
-            String style = String.format(
-                    "-fx-background-color: transparent;"
-                    + "-fx-background-image: url('%s');"
-                    + "-fx-background-repeat: no-repeat;"
-                    +"-fx-background-position: center;"
-                    + "-fx-background-size: cover;"
-,
-                    textureUrl.toExternalForm()
-            );
-
-            topBar.setStyle("");  // Reset style
+        if (applicableTheme.startsWith("#")) {
+            String style = String.format("-fx-background-color: %s", applicableTheme);
+            System.out.println(style);
             topBar.setStyle(style);
-
         } else {
-            System.err.println("Texture not found.");
+            URL textureUrl = getClass().getResource(applicableTheme);
+
+            if (textureUrl != null) {
+                String style = String.format(
+                        "-fx-background-color: transparent;"
+                        + "-fx-background-image: url('%s');"
+                        + "-fx-background-repeat: no-repeat;"
+                        + "-fx-background-position: center;"
+                        + "-fx-background-size: cover;",
+                        textureUrl.toExternalForm()
+                );
+
+                topBar.setStyle("");  // Reset style
+                topBar.setStyle(style);
+
+            } else {
+                System.err.println("Texture not found. Setting default color.");
+                topBar.setStyle("-fx-background-color: #3c3c3c");
+            }
         }
-    }
-
-    public void setTexture1() {
-        currentTexture = "texture1";
-        applyTexture(currentTexture);
-    }
-
-    public void setTexture2() {
-        currentTexture = "texture2";
-        applyTexture(currentTexture);
-    }
-
-    public void setTexture3() {
-        currentTexture = "texture3";
-        applyTexture(currentTexture);
     }
 
     @FXML

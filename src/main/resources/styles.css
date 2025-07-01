@@ -5,14 +5,15 @@
 
 
 .stackpane-container {
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 12, 0.2, 0, 4);
+    /* -fx-padding: 8; */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.4), 6, 0, 1, 1);
 }
 /* Entire Note Container - Dark background */
 .note-container {
     -fx-background-color: transparent; 
     -fx-border-width: 0;
-    -fx-padding: 0;
-    /* -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 12, 0.2, 0, 4); */
+    -fx-padding: 8;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.4), 6, 0, 1, 1);
 }
 
 /* Top Bar (title area) - Darker toolbar */
@@ -23,6 +24,7 @@
     -fx-padding: 6 10 6 10;
     -fx-spacing: 5;
     -fx-border-width: 0;
+    
 }
 
 /* Title Label + Input */
@@ -53,10 +55,10 @@
     -fx-background-insets: 0;
     -fx-padding: 6;
     -fx-text-fill: #3a3a3a;
-    -fx-font-size: 14px;
-    -fx-font-family: "Segoe UI", "SansSerif";
+    -fx-font-size: 15px;
+    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
     -fx-border-width: 0;
-    /* -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 12, 0.2, 0, 4); */
+    /* -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.35), 8, 0.1, 0, 2); */
 }
 
 /* .menu-dropdown-button {

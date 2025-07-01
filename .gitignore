@@ -5,3 +5,5 @@
 .DS_Store
 Thumbs.db
 .vscode/
+*.exe
+StickyNote-1.0.exe

@@ -17,7 +17,7 @@
             styleClass="top-bar">
 
             <!-- Left: New Note -->
-            <Button onAction="#handleNewNote">
+            <Button onAction="#handleNewNote" fx:id="topBarBtn">
                <graphic>
                   <ImageView fitWidth="20" fitHeight="20">
                      <image>
@@ -131,7 +131,7 @@
                   </items>
                </MenuButton>
 
-               <Button onAction="#handleMinimize">
+               <Button onAction="#handleMinimize" fx:id="topBarBtn">
                   <graphic>
                      <ImageView fitWidth="20" fitHeight="20">
                         <image>
@@ -157,7 +157,7 @@
                   </tooltip>
                </Button> -->
 
-               <Button onAction="#handleClose">
+               <Button onAction="#handleClose" fx:id="topBarBtn">
                   <graphic>
                      <ImageView fitWidth="20" fitHeight="20">
                         <image>
